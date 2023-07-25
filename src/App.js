@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import TransactionTable from './Components/TransactionTable';
 import TransactionForm from './Components/TransactionForm';
 import SearchBar from './Components/searchBar';
@@ -10,19 +9,23 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Fetch data from the local JSON server
-    axios.get('http://localhost:3000/transactions')
+    // Fetch data from the local JSON server using Fetch API
+    fetch('http://localhost:3000/transactions')
       .then((response) => {
-        console.log("response")
-        setTransactions(response.data);
-        setFilteredTransactions(response.data);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("data", data);
+        setTransactions(data);
+        setFilteredTransactions(data);
       })
       .catch((error) => {
         console.error('Error fetching transactions:', error);
       });
   }, []);
-
-
 
   const handleAddTransaction = (newTransaction) => {
     // Update the state with the new transaction
