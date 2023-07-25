@@ -13,6 +13,7 @@ const App = () => {
     // Fetch data from the local JSON server
     axios.get('http://localhost:3000/transactions')
       .then((response) => {
+        console.log("response")
         setTransactions(response.data);
         setFilteredTransactions(response.data);
       })
