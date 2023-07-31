@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     // Fetch data from the local JSON server using Fetch API
-    fetch('http://localhost:3000/transactions')
+    fetch('https://api.npoint.io/69679b0b6549b0c7d98b')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
